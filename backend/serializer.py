@@ -14,7 +14,7 @@ class questionSerializer(serializers.ModelSerializer):
 		model=questions
 		fields=('ques',
 			'opt1',
-			'opt2'
+			'opt2',
 			'opt3',
 			'opt4',
 			'correct')
