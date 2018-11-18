@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import authserializer
 from .models import Auth,quiz_available,questions,S_details,q_details
-from .serializer import authserializer 
+from .serializer import authserializer,questionSerializer,S_detailsserializer,detailsserializer
 from rest_framework.authtoken.models import Token
 from .models import Auth
 
@@ -25,6 +25,7 @@ class batchdetails(APIView):
 		var=S_details.objects.all()
 		serializer=S_detailsserializer(var,many=True)
 		return Response(serializer.data)
+
 class submit_marks(APIView):
 	def sumMarks(self,request):
 		userid=request.POST.get('userid','')
@@ -32,7 +33,7 @@ class submit_marks(APIView):
 		subject_code=request.POST.get('subject_code','')
 		marks=request.POST.get('marks','')
 		quiz_instance=request.POST.get('quiz_instance','')
-		obj=S_detail(userid=userid,batch=batch,subject_code=subject_code,marks=marks,quiz_instance=quiz_instance)
+		obj=S_detailsserializer(userid=userid,batch=batch,subject_code=subject_code,marks=marks,quiz_instance=quiz_instance)
 		obj.save()
 
 def question(request):
