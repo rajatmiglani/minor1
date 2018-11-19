@@ -1,7 +1,7 @@
 from django.db import models
 
 class Auth(models.Model):
-	userid=models.IntegerField(unique=True)
+	userid=models.CharField(max_length=10,unique=True)
 	password=models.CharField(max_length=10)
 
 class subjects(models.Model):

@@ -1,4 +1,4 @@
-from rest_framework.views import APIView
+from rest_framework.views import APIView , status
 from rest_framework.response import Response
 from .serializer import authserializer
 from .models import Auth,quiz_available,questions,S_details,q_details
@@ -7,21 +7,23 @@ from rest_framework.authtoken.models import Token
 from .models import Auth
 
 class authentication(APIView):
-	def validate(self,request):
-		pasw=Auth.objects.get(userid="username")
-		if pasw=="password":
-			qz=quiz_available.objects.all()
-			serializer=authserializer(qz,many=True)
-			return Response(serializer.data)
+	def post(self,request):
+		pasw=Auth.objects.get(userid=request.data.get('userid','')).password
+		print("pasw is " + str(pasw))
+		if pasw==request.data.get('password',''):
+			return Response("ok")
+		return Response(status=status.HTTP_403_FORBIDDEN)
 
 class quiz(APIView):
+
 	def get(self,request):
 		quest=questions.objects.all()
 		print(quest)
 		serializer=questionSerializer(quest,many=True)
 		return Response(serializer.data)
+
 	def post(self,request):
-		subject_code = request.POST.get('subject_code', '')
+		subject_code = request.data.get('subject_code', '')
 		ques = request.data.get('ques', '')
 		opt1 = request.data.get('opt1', '')
 		opt2 = request.data.get('opt2', '')
