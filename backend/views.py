@@ -21,6 +21,13 @@ class quizavailable(APIView):
 		serializer=quiz_availableSerializer(available,many=True)
 		return Response(serializer.data)
 
+class quizStudents(APIView):
+	def post(self,request):
+		question=questions.objects.get(subject_code=request.data.get('subject_code','')).all()
+		print(question)
+		serializer=questionSerializer(question,many=True)
+		return Response(serializer.data)
+		
 class quiz(APIView):
 
 	def get(self,request):
@@ -58,7 +65,7 @@ class submit_marks(APIView):
 		batch=request.data.get('batch','')
 		subject_code=request.data.get('subject_code','')
 		marks=request.data.get('marks','')
-		quiz_instance=request.data.get('quiz_instance','')
-		obj=S_detailsserializer(name=name,userid=userid,batch=batch,subject_code=subject_code,marks=marks,quiz_instance=quiz_instance)
+		#quiz_instance=request.data.get('quiz_instance','')
+		obj=S_details(name=name,userid=userid,batch=batch,subject_code=subject_code,marks=marks)
 		obj.save()
 		return Response("ok")

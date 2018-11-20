@@ -20,7 +20,7 @@ class S_details(models.Model):
 	batch=models.CharField(max_length=2)
 	subject_code=models.CharField(max_length=10)
 	marks=models.IntegerField()
-	quiz_instance=models.CharField(max_length=4)	
+	#quiz_instance=models.CharField(max_length=4)	
 
 class quiz_available(models.Model):
 	quiz_name=models.CharField(max_length=4)

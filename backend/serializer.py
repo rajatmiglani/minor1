@@ -27,7 +27,6 @@ class S_detailsserializer(serializers.ModelSerializer):
 			'userid',
 			'batch',
 			'subject_code',
-			'quiz_instance'
 			'marks'
 		)
 
