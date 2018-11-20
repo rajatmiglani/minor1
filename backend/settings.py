@@ -39,12 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'backend',
-    'rest_framework.authtoken',
-    'rest_auth',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
     
 ]
 SITE_ID = 1
@@ -88,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'project',
         'USER':'root',
-        'PASSWORD':'rajat9192',
+        'PASSWORD':'123456789',
     }
 }
 
