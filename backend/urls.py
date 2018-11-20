@@ -25,6 +25,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^quiz/',views.quiz.as_view()),
     url(r'^auth/',views.authentication.as_view()),
+    url(r'^quizavailable/',views.quizavailable.as_view()),
+    url(r'^submit_marks/',views.submit_marks.as_view()),
+    url(r'^batchdetails/',views.batchdetails.as_view()),
+
     #url(r'^api/v1/auth/',include('rest_auth.urls')),
     #url(r'^rest-auth/registration/', include('rest_auth.registration.urls'))
     #url(r'^$',views.IndexView.as_view(),name='index'),

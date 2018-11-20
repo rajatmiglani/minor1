@@ -4,9 +4,9 @@ from backend.models import Auth,subjects,q_details,S_details,quiz_available,ques
 from rest_framework import exceptions
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-class authserializer(serializers.ModelSerializer):
+class quiz_availableSerializer(serializers.ModelSerializer):
 	class Meta:
-		model=quiz_available
+		model=subjects
 		fields='_all_'
 
 class questionSerializer(serializers.ModelSerializer):

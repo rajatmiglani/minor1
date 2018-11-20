@@ -1,8 +1,7 @@
 from rest_framework.views import APIView , status
 from rest_framework.response import Response
-from .serializer import authserializer
-from .models import Auth,quiz_available,questions,S_details,q_details
-from .serializer import authserializer,questionSerializer,S_detailsserializer,detailsserializer
+from .models import Auth,quiz_available,questions,S_details,q_details,subjects
+from .serializer import questionSerializer,S_detailsserializer,detailsserializer,quiz_availableSerializer
 from rest_framework.authtoken.models import Token
 from .models import Auth
 
@@ -12,7 +11,15 @@ class authentication(APIView):
 		print("pasw is " + str(pasw))
 		if pasw==request.data.get('password',''):
 			return Response("ok")
-		return Response(status=status.HTTP_403_FORBIDDEN)
+		return Response(status=status.HTTP_403_FORBIDDEN)	
+
+#name is quiz available but subjects and subject_code are taken from subjects model(check serializer)
+class quizavailable(APIView):
+	def get(self,request):
+		available=subjects.objects.all()
+		print(available)
+		serializer=quiz_availableSerializer(available,many=True)
+		return Response(serializer.data)
 
 class quiz(APIView):
 
@@ -36,18 +43,22 @@ class quiz(APIView):
 		obj.save()
 		return Response("ok")
 
+#marks table
 class batchdetails(APIView):
-	def det(self,request):
+	def get(self,request):
 		var=S_details.objects.all()
 		serializer=S_detailsserializer(var,many=True)
 		return Response(serializer.data)
 
+#to submit marks of students in table (check instatance field once)
 class submit_marks(APIView):
-	def sumMarks(self,request):
-		userid=request.POST.get('userid','')
-		batch=request.POST.get('batch','')
-		subject_code=request.POST.get('subject_code','')
-		marks=request.POST.get('marks','')
-		quiz_instance=request.POST.get('quiz_instance','')
-		obj=S_detailsserializer(userid=userid,batch=batch,subject_code=subject_code,marks=marks,quiz_instance=quiz_instance)
+	def post(self,request):
+		userid=request.data.get('userid','')
+		name=request.data.get('name','')
+		batch=request.data.get('batch','')
+		subject_code=request.data.get('subject_code','')
+		marks=request.data.get('marks','')
+		quiz_instance=request.data.get('quiz_instance','')
+		obj=S_detailsserializer(name=name,userid=userid,batch=batch,subject_code=subject_code,marks=marks,quiz_instance=quiz_instance)
 		obj.save()
+		return Response("ok")
