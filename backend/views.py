@@ -23,7 +23,7 @@ class quizavailable(APIView):
 
 class quizStudents(APIView):
 	def post(self,request):
-		question=questions.objects.get(subject_code=request.data.get('subject_code','')).all()
+		question=questions.objects.filter(subject_code=request.data.get('subject_code',''))
 		print(question)
 		serializer=questionSerializer(question,many=True)
 		return Response(serializer.data)

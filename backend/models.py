@@ -9,14 +9,14 @@ class subjects(models.Model):
 	subject_code=models.CharField(max_length=10)
 
 class q_details(models.Model):
-	subject_code=models.CharField(max_length=10)
+	subject_code=models.CharField(max_length=10,unique=True)
 	fname=models.CharField(max_length=50)
 	batch=models.CharField(max_length=2)
 	quiz_instance=models.CharField(max_length=4)
 
 class S_details(models.Model):
 	name=models.CharField(max_length=40)
-	userid=models.IntegerField(unique=True)
+	userid=models.CharField(max_length=10)
 	batch=models.CharField(max_length=2)
 	subject_code=models.CharField(max_length=10)
 	marks=models.IntegerField()
