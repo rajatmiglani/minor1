@@ -5,7 +5,7 @@ class Auth(models.Model):
 	password=models.CharField(max_length=10)
 
 class subjects(models.Model):
-	subject_name=models.CharField(max_length=10)
+	subject_name=models.CharField(max_length=50)
 	subject_code=models.CharField(max_length=10)
 
 class q_details(models.Model):

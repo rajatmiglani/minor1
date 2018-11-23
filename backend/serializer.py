@@ -7,7 +7,8 @@ from django.contrib.auth import authenticate
 class quiz_availableSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=subjects
-		fields='_all_'
+		fields=('subject_name',
+				'subject_code')
 
 class questionSerializer(serializers.ModelSerializer):
 	class Meta:
