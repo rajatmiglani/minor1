@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from backend import models
-from backend.models import Auth,subjects,q_details,S_details,quiz_available,questions
+from backend.models import Auth,subjects,q_details,S_details,quiz_available,questions,Uploadfile
 from rest_framework import exceptions
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate

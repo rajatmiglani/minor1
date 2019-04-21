@@ -33,3 +33,7 @@ class questions(models.Model):
 	opt3=models.CharField(max_length=50)
 	opt4=models.CharField(max_length=50)
 	correct=models.IntegerField()
+
+class Uploadfile(models.Model):
+	file=models.FileField("uploaded file")
+	

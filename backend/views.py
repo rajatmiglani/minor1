@@ -4,6 +4,7 @@ from .models import Auth,quiz_available,questions,S_details,q_details,subjects
 from .serializer import questionSerializer,S_detailsserializer,detailsserializer,quiz_availableSerializer
 from rest_framework.authtoken.models import Token
 from .models import Auth
+from rest_framework import viewsets
 
 class authentication(APIView):
 	def post(self,request):
@@ -11,7 +12,7 @@ class authentication(APIView):
 		print("pasw is " + str(pasw))
 		if pasw==request.data.get('password',''):
 			return Response("ok")
-		return Response(status=status.HTTP_403_FORBIDDEN)	
+		return Response("not found")	
 
 #name is quiz available but subjects and subject_code are taken from subjects model(check serializer)
 class quizavailable(APIView):
@@ -69,3 +70,17 @@ class submit_marks(APIView):
 		obj=S_details(name=name,userid=userid,batch=batch,subject_code=subject_code,marks=marks)
 		obj.save()
 		return Response("ok")
+
+
+class session_(APIView):
+	def post(self,request):
+		pasw=Auth.objects.get(userid=request.data.get('userid','')).password
+		print("pasw is " + str(pasw))
+		#userid=Auth.objects.get(userid=request.data.get('userid',''))
+		if pasw==request.data.get('password',''):
+			request.session['userid']=['userid']
+			return Response("session in")
+	def get(self,request):
+		if request.session.has_key('userid'):
+			request.session.flush()
+			return Response("session out")

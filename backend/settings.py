@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'backend',
+    'fileupload_rest',
     'django.contrib.sites',
     
 ]
@@ -129,3 +130,5 @@ STATICIFILES_DIRS=[
     'static'
 
 ]
+MEDIA_ROOT=os.path.join(BASE_DIR, '..','upload_media')
+MEDIA_URL='/media/' 
